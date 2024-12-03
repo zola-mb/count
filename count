@@ -1,0 +1,122 @@
+#Import steps here
+    #Import libraries
+    #Import data
+    #Run calculations
+    #Create graphs
+    #Visualise on streamlit
+
+#Import libraries
+import pandas as pd
+import plotly.express as px
+import streamlit as st
+import plotly.graph_objects as go
+from PIL import Image
+
+#import data
+count = pd.read_excel("2024 Combined - Count Assessments (2).xlsx")
+
+#Run calculations
+
+#Save columns in a Series
+column_numeric = ["Nov - Oral Counting (10)", "Nov - One to One Counting (10)", "Nov - Matching (5)", "Nov - Sorting & Reasoning (2)", "Nov - Measuring (4)", "Nov - Floating vs Sinking (8)", "Nov - Animals (20)", "Nov - Clothes (8)", "Nov - Feely Bags (4)", "Nov - Total (71)"]
+
+# List of columns to convert
+column_numeric = [
+    "Nov - Oral Counting (10)",
+    "Nov - One to One Counting (10)",
+    "Nov - Matching (5)",
+    "Nov - Sorting & Reasoning (2)",
+    "Nov - Measuring (4)",
+    "Nov - Floating vs Sinking (8)",
+    "Nov - Animals (20)",
+    "Nov - Clothes (8)",
+    "Nov - Feely Bags (4)",
+    "Nov - Total (71)"
+]
+
+# Convert each column in the list to numeric
+for col in column_numeric:
+    count[col] = pd.to_numeric(count[col], errors='coerce')
+
+# Convert specified columns to int64
+for col in column_numeric:
+    # Convert to numeric, coercing invalid values to NaN
+    count[col] = pd.to_numeric(count[col], errors='coerce')
+    # Fill NaN with a default value (e.g., 0) or handle as needed
+    count[col] = count[col].fillna(0).astype('int64')
+
+#Section - Overall Improvement
+
+st.subheader("Overall Improvement")
+st.write("This is overall improvement for the entire assessment across the different the different ECDCs. This is based on scores on Baseline vs Endline")
+
+count["Overall Improvement"] = count["Nov - Total (71)"] - count["Jan - Total (71)"]
+
+# Sort the DataFrame based on the "Overall Improvement" column in descending order
+count_sorted = count.sort_values(by="Overall Improvement", ascending=False)
+count_sorted.columns
+
+overall_improvement = count_sorted.groupby("School")["Overall Improvement"].mean().sort_values(ascending=False).reset_index()
+
+#Visualise Overall Improvement
+
+fig = px.bar(overall_improvement, x="School", y="Overall Improvement", color="School",title="Overall Improvement by School")
+#fig.show()
+st.plotly_chart(fig)
+
+#Oral Counting Improvement
+st.subheader("Oral Improvement")
+st.write("This is improvement for the Oral Counting question")
+
+count["Improvement - Oral Counting"] = count["Nov - Oral Counting (10)"] - count["Jan - Oral Counting (10)"]
+
+# Sort the DataFrame based on the "Overall Improvement" column in descending order
+count_sorted = count.sort_values(by="Overall Improvement", ascending=False)
+
+df_count = count_sorted[['School', 'Jan - Oral Counting (10)', 'Jan - One to One Counting (10)',
+       'Jan - Matching (5)', 'Jan - Sorting & Reasoning (2)',
+       'Jan - Measuring (4)', 'Jan - Floating vs Sinking (8)',
+       'Jan - Animals (20)', 'Jan - Clothes (8)', 'Jan - Feely Bags (4)',
+       'Jan - Total (71)', 'Nov - Oral Counting (10)',
+       'Nov - One to One Counting (10)', 'Nov - Matching (5)',
+       'Nov - Sorting & Reasoning (2)', 'Nov - Measuring (4)',
+       'Nov - Floating vs Sinking (8)', 'Nov - Animals (20)',
+       'Nov - Clothes (8)', 'Nov - Feely Bags (4)', 'Nov - Total (71)', 'Overall Improvement']]
+
+oral_improvement = count_sorted[["School","Jan - Oral Counting (10)","Nov - Oral Counting (10)", "Improvement - Oral Counting"]]
+oral_improvement.head(15).sort_values(by="Improvement - Oral Counting",ascending=False).reset_index()
+
+mean_oral = oral_improvement.groupby("School")["Improvement - Oral Counting"].mean().reset_index()
+mean_oral
+fig_oral = mean_oral.sort_values(by="Improvement - Oral Counting",ascending=False).reset_index()
+fig_oral
+fig = px.histogram(fig_oral, x="School", y="Improvement - Oral Counting",color="School", title="Oral Improvement by School")
+fig.show()
+
+#1-1 Counting Improvement
+st.subheader("1-1 Counting Improvement")
+st.write("This is improvement for the 1-1 Counting question")
+
+count_sorted["Improvement - Counting"] = count_sorted["Nov - One to One Counting (10)"] - count["Jan - One to One Counting (10)"]
+count_improvement = count_sorted[["School", "Jan - One to One Counting (10)","Nov - One to One Counting (10)","Improvement - Counting"]]
+count_improvement.head(15).sort_values(by="Improvement - Counting",ascending=False).reset_index()
+mean_counting = count_improvement.groupby("School")["Improvement - Counting"].mean().reset_index()
+mean_counting
+fig_counting = mean_counting.sort_values(by="Improvement - Counting", ascending=False)
+fig_counting
+fig = px.histogram(fig_counting, x="School", y="Improvement - Counting",color="School", title="Counting Improvement by School")
+fig.show()
+
+#Matching Improvement
+st.subheader("Matching Improvement")
+st.write("This is improvement for the Matching question")
+
+count_sorted["Improvement - Matching"] = count_sorted["Nov - Matching (5)"] - count["Jan - Matching (5)"]
+match_improvement = count_sorted[["School","Jan - Matching (5)","Nov - Matching (5)", "Improvement - Matching"]]
+match_improvement.head(15).sort_values(by="Improvement - Matching",ascending=False).reset_index()
+mean_matching = match_improvement.groupby("School")["Improvement - Matching"].mean().reset_index()
+fig_matching = mean_matching.sort_values(by="Improvement - Matching", ascending=False)
+fig = px.histogram(fig_matching, x="School", y="Improvement - Matching",color="School", title="Matching Improvement by School")
+fig.show()
+
+
