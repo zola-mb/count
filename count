@@ -60,9 +60,9 @@ overall_improvement = count_sorted.groupby("School")["Overall Improvement"].mean
 
 #Visualise Overall Improvement
 
-fig = px.bar(overall_improvement, x="School", y="Overall Improvement", color="School",title="Overall Improvement by School")
+fig_overall = px.bar(overall_improvement, x="School", y="Overall Improvement", color="School",title="Overall Improvement by School")
 #fig.show()
-st.plotly_chart(fig)
+st.plotly_chart(fig_overall)
 
 #Oral Counting Improvement
 st.subheader("Oral Improvement")
@@ -90,8 +90,9 @@ mean_oral = oral_improvement.groupby("School")["Improvement - Oral Counting"].me
 mean_oral
 fig_oral = mean_oral.sort_values(by="Improvement - Oral Counting",ascending=False).reset_index()
 fig_oral
-fig = px.histogram(fig_oral, x="School", y="Improvement - Oral Counting",color="School", title="Oral Improvement by School")
-fig.show()
+fig_oralchart = px.histogram(fig_oral, x="School", y="Improvement - Oral Counting",color="School", title="Oral Improvement by School")
+#fig.show()
+st.plotly_chart(fig_oralchart)
 
 #1-1 Counting Improvement
 st.subheader("1-1 Counting Improvement")
@@ -104,8 +105,9 @@ mean_counting = count_improvement.groupby("School")["Improvement - Counting"].me
 mean_counting
 fig_counting = mean_counting.sort_values(by="Improvement - Counting", ascending=False)
 fig_counting
-fig = px.histogram(fig_counting, x="School", y="Improvement - Counting",color="School", title="Counting Improvement by School")
-fig.show()
+fig_countingchart = px.histogram(fig_counting, x="School", y="Improvement - Counting",color="School", title="Counting Improvement by School")
+#fig.show()
+st.plotly_chart(fig_countingchart)
 
 #Matching Improvement
 st.subheader("Matching Improvement")
@@ -116,7 +118,8 @@ match_improvement = count_sorted[["School","Jan - Matching (5)","Nov - Matching 
 match_improvement.head(15).sort_values(by="Improvement - Matching",ascending=False).reset_index()
 mean_matching = match_improvement.groupby("School")["Improvement - Matching"].mean().reset_index()
 fig_matching = mean_matching.sort_values(by="Improvement - Matching", ascending=False)
-fig = px.histogram(fig_matching, x="School", y="Improvement - Matching",color="School", title="Matching Improvement by School")
-fig.show()
+fig_match = px.histogram(fig_matching, x="School", y="Improvement - Matching",color="School", title="Matching Improvement by School")
+#fig.show()
+st.plotly_chart(fig_match)
 
 
