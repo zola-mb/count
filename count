@@ -122,4 +122,91 @@ fig_match = px.histogram(fig_matching, x="School", y="Improvement - Matching",co
 #fig.show()
 st.plotly_chart(fig_match)
 
+#Sorting & Reasoning Improvement
+st.subheader("Sorting & Reasoning Improvement")
+st.write("This is improvement for the Sorting & Reasoning question")
+
+count_sorted["Improvement - Sorting & Reasoning"] = count_sorted["Nov - Sorting & Reasoning (2)"] - count["Jan - Sorting & Reasoning (2)"]
+sort_improvement = count_sorted[["School","Jan - Sorting & Reasoning (2)","Nov - Sorting & Reasoning (2)", "Improvement - Sorting & Reasoning"]]
+sort_improvement.head(15).sort_values(by="Improvement - Sorting & Reasoning", ascending=False).reset_index()
+sort_mean = sort_improvement.groupby("School")["Improvement - Sorting & Reasoning"].mean().reset_index()
+sort_mean
+fig_sort = sort_mean.sort_values(by="Improvement - Sorting & Reasoning",ascending=False).reset_index()
+fig_sorting = px.histogram(fig_sort, x="School", y="Improvement - Sorting & Reasoning",color="School", title="Sorting & Reasoning Improvement by School")
+#fig.show()
+st.plotly_chart(fig_sorting)
+
+#Measuring Improvement
+st.subheader("Measuring Improvement")
+st.write("This is improvement for the Measuring question")
+
+count_sorted["Improvement - Measuring"] = count_sorted["Nov - Measuring (4)"] - count["Jan - Measuring (4)"]
+measuring_improvement = count_sorted[["School","Jan - Measuring (4)","Nov - Measuring (4)", "Improvement - Measuring"]]
+measuring_improvement.head(15).sort_values(by="Improvement - Measuring",ascending=False).reset_index()
+mean_measuring = measuring_improvement.groupby("School")["Improvement - Measuring"].mean().reset_index()
+mean_measuring
+fig_measuring = mean_measuring.sort_values(by="Improvement - Measuring", ascending=False).reset_index()
+fig_measure = px.histogram(fig_measuring, x="School", y="Improvement - Measuring",color="School", title="Measuring Improvement by School")
+#fig.show()
+st.plotly_chart(fig_measure)
+
+#Floating vs Sinking Improvement
+st.subheader("Floating vs Sinking Improvement")
+st.write("This is improvement for the Floating vs Sinking question")
+
+count_sorted["Improvement - Floating vs Sinking"] = count_sorted["Nov - Floating vs Sinking (8)"] - count["Jan - Floating vs Sinking (8)"]
+float_improvement = count_sorted[["School","Jan - Floating vs Sinking (8)","Nov - Floating vs Sinking (8)", "Improvement - Floating vs Sinking"]]
+float_improvement.head(15).sort_values(by="Improvement - Floating vs Sinking", ascending=False).reset_index()
+mean_float = float_improvement.groupby("School")["Improvement - Floating vs Sinking"].mean().reset_index()
+mean_float
+fig_float = mean_float.sort_values(by="Improvement - Floating vs Sinking", ascending=False).reset_index()
+fig_floating = px.histogram(fig_float, x="School", y="Improvement - Floating vs Sinking",color="School", title="Floating vs Sinking Improvement by School")
+#fig.show
+st.plotly_chart(fig_floating)
+
+
+#Animals Improvement
+st.subheader("Animals Improvement")
+st.write("This is improvement for the Animals question")
+
+count_sorted["Improvement - Animals"] = count_sorted["Nov - Animals (20)"] - count["Jan - Animals (20)"]
+animals_improvement = count_sorted[["School","Jan - Animals (20)","Nov - Animals (20)", "Improvement - Animals"]]
+animals_improvement.head(15).sort_values(by="Improvement - Animals", ascending=False).reset_index()
+mean_animals = animals_improvement.groupby("School")["Improvement - Animals"].mean().reset_index()
+mean_animals
+fig_animals = mean_animals.sort_values(by="Improvement - Animals", ascending=False).reset_index()
+fig_animalschart = px.histogram(fig_animals, x="School", y="Improvement - Animals",color="School", title="Animals Improvement by School")
+#fig.show
+st.plotly_chart(fig_animalschart)
+
+#Clothes Improvement
+st.subheader("Clothes Improvement")
+st.write("This is improvement for the Clothes question")
+
+count_sorted["Improvement - Clothes"] = count_sorted["Nov - Clothes (8)"] - count["Jan - Clothes (8)"]
+clothes_improvement = count_sorted[["School", "Jan - Clothes (8)", "Nov - Clothes (8)", "Improvement - Clothes"]]
+clothes_improvement.head(15).sort_values(by="Improvement - Clothes", ascending=False).reset_index()
+mean_clothes = clothes_improvement.groupby("School")["Improvement - Clothes"].mean().reset_index()
+mean_clothes
+fig_clothes = mean_clothes.sort_values(by="Improvement - Clothes", ascending=False).reset_index()
+fig_clotheschart = px.histogram(fig_clothes, x="School", y="Improvement - Clothes",color="School", title="Clothes Improvement by School")
+#fig.show
+st.plotly_chart(fig_clotheschart)
+
+#Clothes Improvement
+st.subheader("Feely Bags Improvement")
+st.write("This is improvement for the Feely Bags question")
+
+count_sorted["Improvement - Feely Bags"] = count_sorted["Nov - Feely Bags (4)"] - count["Jan - Feely Bags (4)"]
+bags_improvement = count_sorted[["School", "Jan - Feely Bags (4)", "Nov - Feely Bags (4)", "Improvement - Feely Bags"]]
+bags_improvement.head(15).sort_values(by="Improvement - Feely Bags", ascending=False).reset_index()
+mean_bags = bags_improvement.groupby("School")["Improvement - Feely Bags"].mean().reset_index()
+mean_bags
+fig_bags = mean_bags.sort_values(by="Improvement - Feely Bags", ascending=False).reset_index()
+fig_feelybags = px.histogram(fig_bags, x="School", y="Improvement - Feely Bags",color="School", title="Feely Bags Improvement by School")
+#fig.show()
+st.plotly_chart(fig_feelybags)
+
+#Improvement per question
+
 
