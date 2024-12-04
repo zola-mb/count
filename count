@@ -12,6 +12,14 @@ import streamlit as st
 import plotly.graph_objects as go
 from PIL import Image
 
+#Landing page
+st.set_page_config(page_title="COUNT FMSP Analyisis", page_icon=":student:", layout="centered")
+st.title("COUNT FMSP Analyisis")
+img_contact_form = Image.open("COUNT Africa - Play Day - 04 October 2024 (23).jpg")
+st.image(img_contact_form, use_container_width=True)
+
+st.write("---")
+
 #import data
 count = pd.read_excel("2024 Combined - Count Assessments (2).xlsx")
 
@@ -45,6 +53,29 @@ for col in column_numeric:
     # Fill NaN with a default value (e.g., 0) or handle as needed
     count[col] = count[col].fillna(0).astype('int64')
 
+#Top Performing Children
+st.header("Top Performing Children")
+
+#Baseline
+baseline_results = count[["Full Name", "School", "Jan - Total (71)"]].sort_values(by="Jan - Total (71)", ascending=False).head(10)
+#baseline_results
+fig_baseline = px.histogram(baseline_results, x="Full Name", y="Jan - Total (71)", color="School", title="Top 10 Performing Children (Baseline)")
+#fig.show()
+st.plotly_chart(fig_baseline)
+baseline_results
+
+#Endline
+endline_results = count[["Full Name", "School", "Nov - Total (71)"]].sort_values(by="Nov - Total (71)", ascending=False).head(10)
+#endline_results
+fig_endline = px.histogram(endline_results, x="Full Name", y="Nov - Total (71)", color="School", title="Top 10 Performing Children (Endline)")
+#fig.show
+st.plotly_chart(fig_endline)
+endline_results
+
+st.write("---")
+
+st.header("Analysis on Baseline vs Endline Results")
+
 #Section - Overall Improvement
 
 st.subheader("Overall Improvement")
@@ -54,7 +85,7 @@ count["Overall Improvement"] = count["Nov - Total (71)"] - count["Jan - Total (7
 
 # Sort the DataFrame based on the "Overall Improvement" column in descending order
 count_sorted = count.sort_values(by="Overall Improvement", ascending=False)
-count_sorted.columns
+#count_sorted.columns
 
 overall_improvement = count_sorted.groupby("School")["Overall Improvement"].mean().sort_values(ascending=False).reset_index()
 
@@ -65,7 +96,7 @@ fig_overall = px.bar(overall_improvement, x="School", y="Overall Improvement", c
 st.plotly_chart(fig_overall)
 
 #Oral Counting Improvement
-st.subheader("Oral Improvement")
+st.subheader("Oral Counting Improvement")
 st.write("This is improvement for the Oral Counting question")
 
 count["Improvement - Oral Counting"] = count["Nov - Oral Counting (10)"] - count["Jan - Oral Counting (10)"]
@@ -87,9 +118,9 @@ oral_improvement = count_sorted[["School","Jan - Oral Counting (10)","Nov - Oral
 oral_improvement.head(15).sort_values(by="Improvement - Oral Counting",ascending=False).reset_index()
 
 mean_oral = oral_improvement.groupby("School")["Improvement - Oral Counting"].mean().reset_index()
-mean_oral
+#mean_oral
 fig_oral = mean_oral.sort_values(by="Improvement - Oral Counting",ascending=False).reset_index()
-fig_oral
+#fig_oral
 fig_oralchart = px.histogram(fig_oral, x="School", y="Improvement - Oral Counting",color="School", title="Oral Improvement by School")
 #fig.show()
 st.plotly_chart(fig_oralchart)
@@ -102,9 +133,9 @@ count_sorted["Improvement - Counting"] = count_sorted["Nov - One to One Counting
 count_improvement = count_sorted[["School", "Jan - One to One Counting (10)","Nov - One to One Counting (10)","Improvement - Counting"]]
 count_improvement.head(15).sort_values(by="Improvement - Counting",ascending=False).reset_index()
 mean_counting = count_improvement.groupby("School")["Improvement - Counting"].mean().reset_index()
-mean_counting
+#mean_counting
 fig_counting = mean_counting.sort_values(by="Improvement - Counting", ascending=False)
-fig_counting
+#fig_counting
 fig_countingchart = px.histogram(fig_counting, x="School", y="Improvement - Counting",color="School", title="Counting Improvement by School")
 #fig.show()
 st.plotly_chart(fig_countingchart)
@@ -130,7 +161,7 @@ count_sorted["Improvement - Sorting & Reasoning"] = count_sorted["Nov - Sorting 
 sort_improvement = count_sorted[["School","Jan - Sorting & Reasoning (2)","Nov - Sorting & Reasoning (2)", "Improvement - Sorting & Reasoning"]]
 sort_improvement.head(15).sort_values(by="Improvement - Sorting & Reasoning", ascending=False).reset_index()
 sort_mean = sort_improvement.groupby("School")["Improvement - Sorting & Reasoning"].mean().reset_index()
-sort_mean
+#sort_mean
 fig_sort = sort_mean.sort_values(by="Improvement - Sorting & Reasoning",ascending=False).reset_index()
 fig_sorting = px.histogram(fig_sort, x="School", y="Improvement - Sorting & Reasoning",color="School", title="Sorting & Reasoning Improvement by School")
 #fig.show()
@@ -144,7 +175,7 @@ count_sorted["Improvement - Measuring"] = count_sorted["Nov - Measuring (4)"] - 
 measuring_improvement = count_sorted[["School","Jan - Measuring (4)","Nov - Measuring (4)", "Improvement - Measuring"]]
 measuring_improvement.head(15).sort_values(by="Improvement - Measuring",ascending=False).reset_index()
 mean_measuring = measuring_improvement.groupby("School")["Improvement - Measuring"].mean().reset_index()
-mean_measuring
+#mean_measuring
 fig_measuring = mean_measuring.sort_values(by="Improvement - Measuring", ascending=False).reset_index()
 fig_measure = px.histogram(fig_measuring, x="School", y="Improvement - Measuring",color="School", title="Measuring Improvement by School")
 #fig.show()
@@ -158,7 +189,7 @@ count_sorted["Improvement - Floating vs Sinking"] = count_sorted["Nov - Floating
 float_improvement = count_sorted[["School","Jan - Floating vs Sinking (8)","Nov - Floating vs Sinking (8)", "Improvement - Floating vs Sinking"]]
 float_improvement.head(15).sort_values(by="Improvement - Floating vs Sinking", ascending=False).reset_index()
 mean_float = float_improvement.groupby("School")["Improvement - Floating vs Sinking"].mean().reset_index()
-mean_float
+#mean_float
 fig_float = mean_float.sort_values(by="Improvement - Floating vs Sinking", ascending=False).reset_index()
 fig_floating = px.histogram(fig_float, x="School", y="Improvement - Floating vs Sinking",color="School", title="Floating vs Sinking Improvement by School")
 #fig.show
@@ -173,7 +204,7 @@ count_sorted["Improvement - Animals"] = count_sorted["Nov - Animals (20)"] - cou
 animals_improvement = count_sorted[["School","Jan - Animals (20)","Nov - Animals (20)", "Improvement - Animals"]]
 animals_improvement.head(15).sort_values(by="Improvement - Animals", ascending=False).reset_index()
 mean_animals = animals_improvement.groupby("School")["Improvement - Animals"].mean().reset_index()
-mean_animals
+#mean_animals
 fig_animals = mean_animals.sort_values(by="Improvement - Animals", ascending=False).reset_index()
 fig_animalschart = px.histogram(fig_animals, x="School", y="Improvement - Animals",color="School", title="Animals Improvement by School")
 #fig.show
@@ -187,7 +218,7 @@ count_sorted["Improvement - Clothes"] = count_sorted["Nov - Clothes (8)"] - coun
 clothes_improvement = count_sorted[["School", "Jan - Clothes (8)", "Nov - Clothes (8)", "Improvement - Clothes"]]
 clothes_improvement.head(15).sort_values(by="Improvement - Clothes", ascending=False).reset_index()
 mean_clothes = clothes_improvement.groupby("School")["Improvement - Clothes"].mean().reset_index()
-mean_clothes
+#mean_clothes
 fig_clothes = mean_clothes.sort_values(by="Improvement - Clothes", ascending=False).reset_index()
 fig_clotheschart = px.histogram(fig_clothes, x="School", y="Improvement - Clothes",color="School", title="Clothes Improvement by School")
 #fig.show
@@ -201,7 +232,7 @@ count_sorted["Improvement - Feely Bags"] = count_sorted["Nov - Feely Bags (4)"] 
 bags_improvement = count_sorted[["School", "Jan - Feely Bags (4)", "Nov - Feely Bags (4)", "Improvement - Feely Bags"]]
 bags_improvement.head(15).sort_values(by="Improvement - Feely Bags", ascending=False).reset_index()
 mean_bags = bags_improvement.groupby("School")["Improvement - Feely Bags"].mean().reset_index()
-mean_bags
+#mean_bags
 fig_bags = mean_bags.sort_values(by="Improvement - Feely Bags", ascending=False).reset_index()
 fig_feelybags = px.histogram(fig_bags, x="School", y="Improvement - Feely Bags",color="School", title="Feely Bags Improvement by School")
 #fig.show()
