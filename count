@@ -13,8 +13,8 @@ import plotly.graph_objects as go
 from PIL import Image
 
 #Landing page
-st.set_page_config(page_title="COUNT FMSP Analyisis", page_icon=":student:", layout="centered")
-st.title("COUNT FMSP Analyisis")
+st.set_page_config(page_title="COUNT FMSP Analysis", page_icon=":student:", layout="centered")
+st.title("COUNT FMSP Analysis")
 img_contact_form = Image.open("COUNT Africa - Play Day - 04 October 2024 (23).jpg")
 st.image(img_contact_form, use_container_width=True)
 
@@ -22,8 +22,49 @@ st.write("---")
 
 #import data
 count = pd.read_excel("2024 Combined - Count Assessments (2).xlsx")
+report = pd.read_excel("FMSP Facilitator Data Collection (Responses).xlsx")
 
 #Run calculations
+
+#Sessions
+
+st.header("Sessions Data")
+st.write("Children across 13 centres received a total number of 2 492 Maths and Sciences sessions from February to "
+         "November. The two charts below show a) total number of sessions done at each ECD Centre and; b) total "
+         "number of sessions done per month.")
+
+report["Sessions"] = pd.to_numeric(report["Sessions"], errors="coerce")
+
+report = report.dropna(subset=["Sessions"])
+
+report["Sessions"] = report["Sessions"].fillna(0)
+
+sessions = report[["ECDC Name", "Sessions", "Month"]].reset_index()
+sessions = sessions.sort_values(by="Sessions", ascending=False, na_position='last').reset_index()
+
+fig_sessions = px.histogram(sessions, x="ECDC Name", y="Sessions", color="ECDC Name",title="Total Sessions Done per ECDC")
+#fig_sessions.show()
+st.plotly_chart(fig_sessions)
+
+# Define the proper order of months
+month_order = [
+    "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November"
+]
+
+# Convert the Month column to a categorical type with the specified order
+sessions["Month"] = pd.Categorical(sessions["Month"], categories=month_order, ordered=True)
+
+# Sort by Month
+sessions = sessions.sort_values("Month")
+
+# Plot the updated data
+fig_monthlysessions = px.histogram(sessions, x="Month", y="Sessions", color="Month", title="Total Sessions Done per Month")
+#fig_sessions.show()
+st.plotly_chart(fig_monthlysessions)
+sessions
+
+st.write("---")
 
 #Save columns in a Series
 column_numeric = ["Nov - Oral Counting (10)", "Nov - One to One Counting (10)", "Nov - Matching (5)", "Nov - Sorting & Reasoning (2)", "Nov - Measuring (4)", "Nov - Floating vs Sinking (8)", "Nov - Animals (20)", "Nov - Clothes (8)", "Nov - Feely Bags (4)", "Nov - Total (71)"]
@@ -237,7 +278,5 @@ fig_bags = mean_bags.sort_values(by="Improvement - Feely Bags", ascending=False)
 fig_feelybags = px.histogram(fig_bags, x="School", y="Improvement - Feely Bags",color="School", title="Feely Bags Improvement by School")
 #fig.show()
 st.plotly_chart(fig_feelybags)
-
-#Improvement per question
 
 
