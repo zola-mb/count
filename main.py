@@ -16,7 +16,7 @@ from PIL import Image
 st.set_page_config(page_title="COUNT FMSP Analysis", page_icon=":student:", layout="centered")
 st.title("COUNT FMSP Analysis")
 img_contact_form = Image.open("COUNT Africa - Play Day - 04 October 2024 (23).jpg")
-st.image(img_contact_form, use_container_width=True)
+st.image(img_contact_form, use_column_width=True)
 
 st.write("---")
 
