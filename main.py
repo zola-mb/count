@@ -132,7 +132,7 @@ st.header("Analysis on Baseline vs Endline Results")
 #Section - Overall Improvement
 
 st.subheader("Overall Improvement")
-st.write("This is overall improvement for the entire assessment across the different the different ECDCs. This is based on scores on Baseline vs Endline")
+st.write("This is overall improvement for the entire assessment across the different the different ECDCs. This is based on scores on Baseline vs Endline. Six of the nine centres showed improvement.")
 
 count["Overall Improvement"] = count["Nov - Total (71)"] - count["Jan - Total (71)"]
 
@@ -150,7 +150,7 @@ st.plotly_chart(fig_overall)
 
 #Oral Counting Improvement
 st.subheader("Oral Counting Improvement")
-st.write("This is improvement for the Oral Counting question")
+st.write("This is average improvement for the Oral Counting question. Eight centres showed improvement, with Avumile showing zero improvement.")
 
 count["Improvement - Oral Counting"] = count["Nov - Oral Counting (10)"] - count["Jan - Oral Counting (10)"]
 
@@ -180,7 +180,7 @@ st.plotly_chart(fig_oralchart)
 
 #1-1 Counting Improvement
 st.subheader("1-1 Counting Improvement")
-st.write("This is improvement for the 1-1 Counting question")
+st.write("This is improvement for the 1-1 Counting question. Six out of nine centres showed improvement.")
 
 count_sorted["Improvement - Counting"] = count_sorted["Nov - One to One Counting (10)"] - count["Jan - One to One Counting (10)"]
 count_improvement = count_sorted[["School", "Jan - One to One Counting (10)","Nov - One to One Counting (10)","Improvement - Counting"]]
@@ -195,7 +195,7 @@ st.plotly_chart(fig_countingchart)
 
 #Matching Improvement
 st.subheader("Matching Improvement")
-st.write("This is improvement for the Matching question")
+st.write("Most children across the nine centres scored lower than their baseline scores on this question. It is worth noting that children from Avumile, which joined the programme much later has the improvement.")
 
 count_sorted["Improvement - Matching"] = count_sorted["Nov - Matching (5)"] - count["Jan - Matching (5)"]
 match_improvement = count_sorted[["School","Jan - Matching (5)","Nov - Matching (5)", "Improvement - Matching"]]
@@ -208,7 +208,7 @@ st.plotly_chart(fig_match)
 
 #Sorting & Reasoning Improvement
 st.subheader("Sorting & Reasoning Improvement")
-st.write("This is improvement for the Sorting & Reasoning question")
+st.write("The children at Siyabulela recorded the most improvement, with majority from other centres not showing much improvement.")
 
 count_sorted["Improvement - Sorting & Reasoning"] = count_sorted["Nov - Sorting & Reasoning (2)"] - count["Jan - Sorting & Reasoning (2)"]
 sort_improvement = count_sorted[["School","Jan - Sorting & Reasoning (2)","Nov - Sorting & Reasoning (2)", "Improvement - Sorting & Reasoning"]]
@@ -222,7 +222,7 @@ st.plotly_chart(fig_sorting)
 
 #Measuring Improvement
 st.subheader("Measuring Improvement")
-st.write("This is improvement for the Measuring question")
+st.write("Four of nine ECD Centres showed improvement. Again, it is interesting to note that the centres that joined later in the year and with less programmes make up the list of improved centres.")
 
 count_sorted["Improvement - Measuring"] = count_sorted["Nov - Measuring (4)"] - count["Jan - Measuring (4)"]
 measuring_improvement = count_sorted[["School","Jan - Measuring (4)","Nov - Measuring (4)", "Improvement - Measuring"]]
@@ -236,7 +236,7 @@ st.plotly_chart(fig_measure)
 
 #Floating vs Sinking Improvement
 st.subheader("Floating vs Sinking Improvement")
-st.write("This is improvement for the Floating vs Sinking question")
+st.write("Six out of nine centres improved. Avumile and St. Mary also joined late in the year and do not have a lot of programmes running.")
 
 count_sorted["Improvement - Floating vs Sinking"] = count_sorted["Nov - Floating vs Sinking (8)"] - count["Jan - Floating vs Sinking (8)"]
 float_improvement = count_sorted[["School","Jan - Floating vs Sinking (8)","Nov - Floating vs Sinking (8)", "Improvement - Floating vs Sinking"]]
@@ -251,7 +251,7 @@ st.plotly_chart(fig_floating)
 
 #Animals Improvement
 st.subheader("Animals Improvement")
-st.write("This is improvement for the Animals question")
+st.write("Children across all nine centres improved on this question.")
 
 count_sorted["Improvement - Animals"] = count_sorted["Nov - Animals (20)"] - count["Jan - Animals (20)"]
 animals_improvement = count_sorted[["School","Jan - Animals (20)","Nov - Animals (20)", "Improvement - Animals"]]
@@ -265,7 +265,7 @@ st.plotly_chart(fig_animalschart)
 
 #Clothes Improvement
 st.subheader("Clothes Improvement")
-st.write("This is improvement for the Clothes question")
+st.write("Children from six out of nine centres could differentiate between summer and winter clothes.")
 
 count_sorted["Improvement - Clothes"] = count_sorted["Nov - Clothes (8)"] - count["Jan - Clothes (8)"]
 clothes_improvement = count_sorted[["School", "Jan - Clothes (8)", "Nov - Clothes (8)", "Improvement - Clothes"]]
@@ -277,9 +277,9 @@ fig_clotheschart = px.histogram(fig_clothes, x="School", y="Improvement - Clothe
 #fig.show
 st.plotly_chart(fig_clotheschart)
 
-#Clothes Improvement
+#Feely Bags
 st.subheader("Feely Bags Improvement")
-st.write("This is improvement for the Feely Bags question")
+st.write("Five out of nine centres improved, with Avumile leading here again.")
 
 count_sorted["Improvement - Feely Bags"] = count_sorted["Nov - Feely Bags (4)"] - count["Jan - Feely Bags (4)"]
 bags_improvement = count_sorted[["School", "Jan - Feely Bags (4)", "Nov - Feely Bags (4)", "Improvement - Feely Bags"]]
