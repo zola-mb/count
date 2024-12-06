@@ -69,7 +69,7 @@ st.write("---")
 
 #Youth Hours
 st.subheader("Youth Hours")
-st.write("Youth dedicated a total of 9 184 hours throughout the year, running FMSP sessions, Siyadlala Workshops and helping out in their respective ECD Centres.")
+st.write("Youth dedicated a total of 9 184 hours throughout the year, running FMSP sessions, Siyadlala workshops and helping out in their respective ECD Centres.")
 total_hours = masshours[["Full Name", "Total Hours"]].sort_values(by="Total Hours", ascending=False).reset_index()
 px.histogram(total_hours, x="Full Name", y="Total Hours", color="Full Name")
 fig_hours = px.histogram(total_hours, x="Full Name", y="Total Hours", color="Full Name")
