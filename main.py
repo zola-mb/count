@@ -310,7 +310,7 @@ st.plotly_chart(plot_gender)
 gender_stats
 
 st.subheader("Gender Performance")
-st.write("Analysis of performance differences between boys and girls who participated in both the baseline and endline assessments.")
+st.write("Analysis of performance differences between boys and girls who participated in both the baseline and endline assessments. The chart below shows that amongst the children that improved, 54% of them were girls.")
 gender["Improved Only"] = (gender["Overall Improvement"] >= 0).astype(int)
 gender["Improved Only"].value_counts().reset_index()
 improved = gender[["Gender", "Improved Only"]]
