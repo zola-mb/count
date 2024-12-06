@@ -195,7 +195,7 @@ st.plotly_chart(fig_countingchart)
 
 #Matching Improvement
 st.subheader("Matching Improvement")
-st.write("Most children across the nine centres scored lower than their baseline scores on this question. It is worth noting that children from Avumile, which joined the programme much later has the improvement.")
+st.write("Most children across the nine centres scored lower than their baseline scores on this question. It is worth noting that children from Avumile, which joined the programme much later, showed the most improvement.")
 
 count_sorted["Improvement - Matching"] = count_sorted["Nov - Matching (5)"] - count["Jan - Matching (5)"]
 match_improvement = count_sorted[["School","Jan - Matching (5)","Nov - Matching (5)", "Improvement - Matching"]]
