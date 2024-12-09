@@ -18,24 +18,42 @@ st.title("COUNT FMSP Analysis")
 img_contact_form = Image.open("COUNT Africa - Play Day - 04 October 2024 (23).jpg")
 st.image(img_contact_form, use_column_width=True)
 
+import streamlit as st
+
+# Define credentials
 credentials = {
     'count': 'fmsp'
 }
 
+# Login function
 def login():
-    st.sidebar.header("Login")
-    username = st.sidebar.text_input("Username", key="username")
-    password = st.sidebar.text_input("Password", type="password", key="password")
+    # Initialize session state
+    if 'user' not in st.session_state:
+        st.session_state.user = None
 
-    if st.sidebar.button("Login"):
-        if username in credentials and credentials[username] == password:
-            st.sidebar.success("Logged in as {}".format(username))
-            st.session_state.user = username
-            st.rerun()  # Rerun to update the sidebar with internal pages
-        else:
-            st.sidebar.error("Incorrect username or password")
-            st.session_state.user = None
-    st.sidebar.text("Log in for more detailed views.")
+    # Check if user is logged in
+    if st.session_state.user:
+        st.sidebar.success(f"Logged in as {st.session_state.user}")
+        return True
+    else:
+        st.sidebar.header("Login")
+        username = st.sidebar.text_input("Username", key="username")
+        password = st.sidebar.text_input("Password", type="password", key="password")
+
+        if st.sidebar.button("Login"):
+            if username in credentials and credentials[username] == password:
+                st.session_state.user = username
+                st.sidebar.success(f"Logged in as {username}")
+            else:
+                st.sidebar.error("Incorrect username or password")
+        return False
+
+# Main app logic
+if login():
+    st.write("Welcome to the protected content!")
+else:
+    st.write("Please log in to access this content.")
+
 
 st.write("---")
 
