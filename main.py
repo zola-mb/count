@@ -20,8 +20,6 @@ st.image(img_contact_form, use_column_width=True)
 
 import streamlit as st
 
-import streamlit as st
-
 # Define credentials
 credentials = {
     'count': 'fmsp'
@@ -54,11 +52,6 @@ def login():
 if login():
     # Protected content
     st.write("Welcome to the protected content!")
-else:
-    # Message for non-logged-in users
-    st.write("You need to log in to view this content.")
-
-
 
 st.write("---")
 
@@ -358,3 +351,7 @@ gender["Improved Only"].value_counts().reset_index()
 improved = gender[["Gender", "Improved Only"]]
 fig_improved = px.pie(improved, names="Gender", values="Improved Only")
 st.plotly_chart(fig_improved)
+
+else:
+    # Message for non-logged-in users
+    st.write("You need to log in to view this content.")
