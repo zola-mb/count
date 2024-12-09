@@ -51,7 +51,7 @@ def login():
 # Main app logic
 if login():
     # Protected content
-    st.write("Welcome to the protected content!")
+    st.write("Welcome to the FMSP analysis data portal.")
 
     st.write("---")
 
