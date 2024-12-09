@@ -13,8 +13,8 @@ import plotly.graph_objects as go
 from PIL import Image
 
 #Landing page
-st.set_page_config(page_title="COUNT FMSP Analysis", page_icon=":child:", layout="centered")
-st.title("COUNT FMSP Analysis")
+st.set_page_config(page_title="FMSP Analysis", page_icon=":child:", layout="centered")
+st.title("FMSP Analysis")
 img_contact_form = Image.open("COUNT Africa - Play Day - 04 October 2024 (23).jpg")
 st.image(img_contact_form, use_column_width=True)
 
