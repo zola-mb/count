@@ -20,6 +20,8 @@ st.image(img_contact_form, use_column_width=True)
 
 import streamlit as st
 
+import streamlit as st
+
 # Define credentials
 credentials = {
     'count': 'fmsp'
@@ -50,9 +52,12 @@ def login():
 
 # Main app logic
 if login():
+    # Protected content
     st.write("Welcome to the protected content!")
 else:
-    st.write("Please log in to access this content.")
+    # Message for non-logged-in users
+    st.write("You need to log in to view this content.")
+
 
 
 st.write("---")
