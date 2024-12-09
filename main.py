@@ -18,6 +18,25 @@ st.title("COUNT FMSP Analysis")
 img_contact_form = Image.open("COUNT Africa - Play Day - 04 October 2024 (23).jpg")
 st.image(img_contact_form, use_column_width=True)
 
+credentials = {
+    'count': 'fmsp'
+}
+
+def login():
+    st.sidebar.header("Login")
+    username = st.sidebar.text_input("Username", key="username")
+    password = st.sidebar.text_input("Password", type="password", key="password")
+
+    if st.sidebar.button("Login"):
+        if username in credentials and credentials[username] == password:
+            st.sidebar.success("Logged in as {}".format(username))
+            st.session_state.user = username
+            st.rerun()  # Rerun to update the sidebar with internal pages
+        else:
+            st.sidebar.error("Incorrect username or password")
+            st.session_state.user = None
+    st.sidebar.text("Log in for more detailed views.")
+
 st.write("---")
 
 #import data
